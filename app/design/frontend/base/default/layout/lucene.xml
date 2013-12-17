@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
-    <default>
+    <!-- <default>
         <reference name="left">
             <block type="lucene/form" name="search" as="form" template="lucene/form.phtml" before="-"/>
             <remove name="top.search"/>
         </reference>
     </default>
-    <lucene_index_index>
+ -->    <lucene_index_index>
         <reference name="left">
             <block type="lucene/filter" name="filter" template="lucene/filter.phtml" after="search"/>
         </reference>
