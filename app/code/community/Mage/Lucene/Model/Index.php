@@ -61,6 +61,7 @@ class Mage_Lucene_Model_Index extends Zend_Search_Lucene_Proxy
                 if($filter->getKey() == self::QUERY_KEY) {
                     $this->addSearchTerm($filter->getValue());
                 } else {
+                	
                     $this->_query->addTerm(
                         new Zend_Search_Lucene_Index_Term(
                             $filter->getValue(),
@@ -69,6 +70,7 @@ class Mage_Lucene_Model_Index extends Zend_Search_Lucene_Proxy
                 }
             }
         }
+        
         return $this->_query;
     }
     
@@ -81,6 +83,8 @@ class Mage_Lucene_Model_Index extends Zend_Search_Lucene_Proxy
      */
     protected function addSearchTerm($terms)
     {
+    	
+    	
         $term = strtok($terms, self::TERM_TOKENIZE_CHARS);
         while($term) {
             $prohibited = $required = false;
@@ -95,6 +99,7 @@ class Mage_Lucene_Model_Index extends Zend_Search_Lucene_Proxy
             } else {
                 $required = true;
             }
+            $required = (!is_numeric($term)) ? true : false;
             $this->_query->addTerm(
                 new Zend_Search_Lucene_Index_Term(strtolower($term)), 
                     $required && !$prohibited
