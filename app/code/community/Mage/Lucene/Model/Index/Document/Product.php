@@ -70,12 +70,19 @@ class Mage_Lucene_Model_Index_Document_Product
      **/
     protected function addAttributes()
     {
+    	
         $this->addField(Zend_Search_Lucene_Field::Text('name',
             $this->getSourceModel()->getName(), self::ENCODING));
+        
         $this->addField(Zend_Search_Lucene_Field::UnIndexed('short_content', 
             $this->getSourceModel()->getShortDescription(), self::ENCODING));
+        
         $this->addField(Zend_Search_Lucene_Field::UnIndexed('url',
             $this->getSourceModel()->getProductUrl(), self::ENCODING));
+        
+        //:updated
+        $this->addField(Zend_Search_Lucene_Field::UnIndexed('image_url',$this->getSourceModel()->getImageUrl(), self::ENCODING));
+        
         $this->addFilterableAttributes();
         $this->addSearchableAttributes();
     }

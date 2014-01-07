@@ -20,7 +20,7 @@ class Mage_Lucene_Model_Index extends Zend_Search_Lucene_Proxy
     var $_results;
     var $_query;
     var $_resultsFilters = array();
-    var $_excludeAttributes = array('short_content', 'url', 'entity_id', 'image', 
+    var $_excludeAttributes = array('short_content', 'url', 'entity_id', 'image_url', 
         'name', Mage_Lucene_Model_Index_Document_Abstract::STORE_ATTRIBUTE_CODE);
 
 
@@ -58,6 +58,7 @@ class Mage_Lucene_Model_Index extends Zend_Search_Lucene_Proxy
 	        $this->_query->addTerm(new Zend_Search_Lucene_Index_Term(Mage::app()->getStore()->getId(), 
 	           Mage_Lucene_Model_Index_Document_Abstract::STORE_ATTRIBUTE_CODE),true);
             foreach($this->getCurrentFilters() as $filter) {
+            	
                 if($filter->getKey() == self::QUERY_KEY) {
                     $this->addSearchTerm($filter->getValue());
                 } else {
@@ -131,7 +132,9 @@ class Mage_Lucene_Model_Index extends Zend_Search_Lucene_Proxy
         if($this->getResults())
         {
             foreach($this->getResults() as $result) {
+            	
                 foreach($result->getData() as $key => $value) {
+                	
                     if(
                         !in_array($key, $this->_excludeAttributes) &&
                         $value &&
