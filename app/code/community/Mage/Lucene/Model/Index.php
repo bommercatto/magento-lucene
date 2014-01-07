@@ -20,7 +20,7 @@ class Mage_Lucene_Model_Index extends Zend_Search_Lucene_Proxy
     var $_results;
     var $_query;
     var $_resultsFilters = array();
-    var $_excludeAttributes = array('short_content', 'url', 'entity_id', 'image_url', 
+    var $_excludeAttributes = array('short_content', 'url', 'entity_id', 'image','thumbnail','small_image','url_path', 
         'name', Mage_Lucene_Model_Index_Document_Abstract::STORE_ATTRIBUTE_CODE);
 
 

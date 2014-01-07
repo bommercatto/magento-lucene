@@ -18,7 +18,12 @@ class Mage_Lucene_Model_Index_Document_Product
             ->addStoreFilter($store)
             ->setVisibility(Mage::getModel('catalog/product_visibility')->getVisibleInSearchIds())
             ->addAttributeToSelect($this->getSearchableAttributesCodes(), true)
-            ->addAttributeToSelect($this->getFilterableAttributesCodes(), true);
+            ->addAttributeToSelect($this->getFilterableAttributesCodes(), true)
+            //:updated
+        	->addAttributeToSelect('url_path')
+        	->addAttributeToSelect('image')
+        	->addAttributeToSelect('thumbnail')
+        	->addAttributeToSelect('small_image');
     }
 
     /**
@@ -81,7 +86,15 @@ class Mage_Lucene_Model_Index_Document_Product
             $this->getSourceModel()->getProductUrl(), self::ENCODING));
         
         //:updated
-        $this->addField(Zend_Search_Lucene_Field::UnIndexed('image_url',$this->getSourceModel()->getImageUrl(), self::ENCODING));
+        $this->addField(Zend_Search_Lucene_Field::Text('image',$this->getSourceModel()->getImage(), self::ENCODING));
+        
+        $this->addField(Zend_Search_Lucene_Field::Text('thumbnail',$this->getSourceModel()->getThumbnail(), self::ENCODING));
+        
+        $this->addField(Zend_Search_Lucene_Field::Text('small_image',$this->getSourceModel()->getSmallImage(), self::ENCODING));
+        
+        $this->addField(Zend_Search_Lucene_Field::Text('url_path',$this->getSourceModel()->getUrlPath(), self::ENCODING));
+        
+        
         
         $this->addFilterableAttributes();
         $this->addSearchableAttributes();
