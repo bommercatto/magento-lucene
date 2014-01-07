@@ -9,20 +9,19 @@
 	<?php endif; ?>
 </h3>
 <?php foreach($this->getResults() as $result): ?>
-<?php // var_dump($result);?>
 <div class="search-result">
-	<?php  if($result->getImageUrl()): ?>
+	<?php  if($result->getSmallImage()): ?>
 	<div class="result-image">
-		<img
-			src="<?php echo $this->helper('catalog/image')->init($result, 'small_image')->resize(135); ?>"
-			width="135" height="135"
-			alt="<?php echo $this->stripTags($this->getImageLabel($result, 'small_image'), null, true) ?>" />
-			
-		
-	</div>
+                <img
+                        src="<?php echo Mage::helper('catalog/image')->init($result, 'small_image')->resize(135); ?>"
+                        width="135" height="135"
+                        alt="<?php echo $this->stripTags($this->getImageLabel($result, 'small_image'), null, true) ?>" />
+
+
+        </div>
 	<?php  endif; ?>
 	<h4>
-		<a href="<?php echo $result->getUrl(); ?>"> <?php echo $result->getName(); ?>
+		 <a href="<?php echo Mage::getUrl($result->getUrlPath()); ?>"> <?php echo $result->getName(); ?>
 		</a>
 	</h4>
 	<p>
@@ -31,7 +30,7 @@
 				'<strong>'.$this->getEscapedQueryText().'</strong>',
 				substr($result->getShortContent(),0,300)
                 ); ?>
-		... <a href="<?php echo $result->getUrl(); ?>"> <?php echo $this->__('more');?>
+		... <a href="<?php echo Mage::getUrl($result->getUrlPath()); ?>"> <?php echo $this->__('more');?>
 		</a>
 	</p>
 	<a href="<?php echo $result->getUrl(); ?>"> <?php echo $result->getUrl();?>
